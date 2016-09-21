@@ -8,6 +8,7 @@ public class Dialog3 {
         // Simple Input dialog:
         String inputValue = JOptionPane.showInputDialog ("What is the price of your dream car?");
         // Simple Message dialog:
+        
         double value; //= Integer.parseInt(inputValue);
         try{
         	value = Integer.parseInt(inputValue);
