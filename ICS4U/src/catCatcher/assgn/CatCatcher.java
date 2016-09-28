@@ -1,45 +1,121 @@
-package catCatcher.assgn;
-
+ package catCatcher.assgn;
+ 
+import java.awt.FlowLayout;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Random;
+ 
+ import javax.swing.*;
+ 
 
-import javax.swing.*;
+public class CatCatcher extends JFrame implements ActionListener, MouseListener, Runnable {
+ 	
+ 	private ImageIcon w, homeworld;
+	//private Timer wTime;
+	private Timer wTime, gameTimer;
+ 	private JLabel wf, bkg;
+    private Random random=new Random();
+    int Score = 0;
+    public String ScoreCount = "Score: " + Score;
+    
+ 	
+ 	public CatCatcher()
+ 	{
+ 			w = new ImageIcon("res/Deanslist.png");
+ 			wf = new JLabel(w);
+ 			homeworld = new ImageIcon("res/Woodie'sHome.png");
+ 			bkg = new JLabel(homeworld);
+ 		    setContentPane(bkg); 
+ 		    getContentPane().setLayout(new FlowLayout());
+ 			//JPanel panel = new JPanel ();
+ 			add(wf);
+ 	        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon("res/mouse.png").getImage(),new Point(0,0),"custom cursor"));
 
-public class CatCatcher extends JFrame implements ActionListener {
-	
-	private ImageIcon w;
-	private Timer wTime;
-	private JLabel wf;
-	
-	public CatCatcher()
+ 			//panel.add(bkg);
+ 			
+ 			
+
+ 			
+			
+	        
+ 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 			this.setExtendedState(MAXIMIZED_BOTH);
+ 			this.setTitle("Woodie Catcher");
+ 			this.setVisible(true);
+			//this.setContentPane (panel);
+			
+ 			wTime=new Timer(1500,this);
+ 	        wTime.start();
+ 	        gameTimer=new Timer(10000,this); 
+ 	        gameTimer.start();
+	       // gameTimer=new Timer(10000,this); 
+ 			
+	        wf.addMouseListener(this);
+ 		}
+ 		
+ 	
+ 	public static void main(String args[])
 	{
-		super ("Cat Catcher");
-		{
-			w = new ImageIcon("res/Deanslist.png");
-			wf = new JLabel(w);
-			JPanel panel = new JPanel ();
-			panel.add(wf);
-			
-			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			this.setExtendedState(MAXIMIZED_BOTH);
-			this.setTitle("WoodieCatcher");
-			this.setVisible(true);
-			
-			this.setContentPane (panel);
-			wTime=new Timer(1500,this);
-	        wTime.start();
-			
-		}
-		
-	}
-	public static void main(String[] args){
 		new CatCatcher();
-	
+	}
+ 	@Override
+ 	public void actionPerformed(ActionEvent e) {
+ 		// TODO Auto-generated method stub
+			
+        if (e.getSource()==wTime) {
+        
+            // Move the cat randomly, subtract width or height so it stays on the screen
+           wf.setLocation(random.nextInt(getWidth()-wf.getWidth()), random.nextInt(getHeight()-wf.getHeight()));
+        }
+        if (e.getSource()==gameTimer) {
+        	JOptionPane.showMessageDialog(null,"Your score is "+Score);
+            System.exit(0);  	
+        }
+        
 	}
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void run() {
 		// TODO Auto-generated method stub
-			
-	}
+		wTime=new Timer(1500,this);
+        wTime.start();
+       
+		
 
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+        actionPerformed(new ActionEvent(wTime,0,""));
+        wTime.restart();
+        Score++;
+        Toolkit.getDefaultToolkit().beep();
+        
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
+ 
+ 
+ 

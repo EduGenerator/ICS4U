@@ -8,7 +8,12 @@ import java.awt.event.*;
 
 public class DialogExamples extends JDialog implements Accessible
 {
-    public static void main (String[] args)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7993349387747062915L;
+
+	public static void main (String[] args)
     {
         // Simple Input dialog:
         String inputValue = JOptionPane.showInputDialog ("Please enter something:");
