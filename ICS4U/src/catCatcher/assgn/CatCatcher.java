@@ -73,6 +73,7 @@ public class CatCatcher extends JFrame implements ActionListener, MouseListener,
         }
         if (e.getSource()==gameTimer) {
         	JOptionPane.showMessageDialog(null,"Your score is "+Score);
+        	
             System.exit(0);  	
         }
         
