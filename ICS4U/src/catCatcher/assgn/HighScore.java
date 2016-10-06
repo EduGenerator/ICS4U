@@ -1,24 +1,35 @@
 package catCatcher.assgn;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-import swing.assgns.FontStyle;
 
-public class HighScore extends JFrame{
+
+public class HighScore extends JFrame implements ActionListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5038103834349788676L;
 	public JLabel HS;
-	
+	public JButton re;
 	int[] highScores = new int [10];
 	String[] listItems= {"0","0","0","0","0","0","0","0","0","0"};
 	
 		public HighScore(){
 		HS = new JLabel("Your Score Is");
+		re = new JButton("Retry?");
 		JList<String> scoreList= new JList<String>(listItems);
 		scoreList.setFixedCellWidth(100);
 		DefaultListCellRenderer renderer=(DefaultListCellRenderer)scoreList.getCellRenderer();
 		        renderer.setHorizontalAlignment(JLabel.CENTER);
 
-		add(HS);
+		add(HS, BorderLayout.NORTH);
+		add(scoreList, BorderLayout.CENTER);
+		add(re, BorderLayout.SOUTH);
 		this.setBounds(200, 200, 200, 200);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,5 +70,14 @@ public class HighScore extends JFrame{
 		new HighScore();
 		
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource()==re) {
+			new CatCatcher();
+			System.exit(0);
+		}
 	}
 }
