@@ -14,7 +14,11 @@ import java.util.Random;
 
 public class CatCatcher extends JFrame implements ActionListener, MouseListener, Runnable {
  	
- 	private ImageIcon w, homeworld;
+ 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5242118490851937165L;
+	private ImageIcon w, homeworld;
 	//private Timer wTime;
 	private Timer wTime, gameTimer;
  	private JLabel wf, bkg;
@@ -75,7 +79,7 @@ public class CatCatcher extends JFrame implements ActionListener, MouseListener,
            wf.setLocation(random.nextInt(getWidth()-wf.getWidth()), random.nextInt(getHeight()-wf.getHeight()));
         }
         if (e.getSource()==gameTimer) {
-        	JOptionPane.showMessageDialog(null,"Your score is "+Score);
+        	//JOptionPane.showMessageDialog(null,"Your score is "+Score);
             if (highScorePanel == null)
             {
                 highScorePanel = new HighScore(Score);
@@ -84,7 +88,14 @@ public class CatCatcher extends JFrame implements ActionListener, MouseListener,
                 highScorePanel.addScore(Score);
             }
             highScorePanel.setVisible(true);
-        	JOptionPane.showMessageDialog(null,"test");
+            while (highScorePanel.isVisible())
+            {
+                try { Thread.sleep(100); } catch (InterruptedException ex) {}
+            }
+
+
+            
+        	//JOptionPane.showMessageDialog(null,"test");
 
         }
         

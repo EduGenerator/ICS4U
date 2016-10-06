@@ -49,18 +49,18 @@ public class HighScore extends JFrame implements ActionListener{
 
 			}
 				listItems[i]=Integer.toString(highScores[i]);
-				repaint();
 			}
 		
 
 			
+		repaint();
 		}
 	
 		
 	
 	public HighScore(int score){
 		this();
-		HS.setText("Your Score :"+score);	
+		addScore(score);	
 		
 	}
 	public static void main(String args[])
@@ -76,8 +76,7 @@ public class HighScore extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource()==re) {
-			new CatCatcher();
-			System.exit(0);
+			setVisible(false);
 		}
 	}
 }
