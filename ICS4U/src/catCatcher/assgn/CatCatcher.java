@@ -78,26 +78,23 @@ public class CatCatcher extends JFrame implements ActionListener, MouseListener,
             // Move the cat randomly, subtract width or height so it stays on the screen
            wf.setLocation(random.nextInt(getWidth()-wf.getWidth()), random.nextInt(getHeight()-wf.getHeight()));
         }
-        if (e.getSource()==gameTimer) {
-        	//JOptionPane.showMessageDialog(null,"Your score is "+Score);
-            if (highScorePanel == null)
-            {
-                highScorePanel = new HighScore(Score);
-            } else
-            {
-                highScorePanel.addScore(Score);
-            }
-            highScorePanel.setVisible(true);
-            while (highScorePanel.isVisible())
-            {
-                try { Thread.sleep(100); } catch (InterruptedException ex) {}
-            }
+        else if (e.getSource()==gameTimer) {
+        	wf.setVisible(false);
+        	gameTimer.stop();
+        	String name = JOptionPane.showInputDialog("Submit your name for Deans List");
+        	
+        	new HighScore(Score, this, name);
+        	gameTimer.restart();
+            wTime.restart();
+            Score = 0;
+            wf.setVisible(true);
+           }
 
 
             
         	//JOptionPane.showMessageDialog(null,"test");
 
-        }
+        //}
         
 	}
 	@Override
@@ -139,6 +136,7 @@ public class CatCatcher extends JFrame implements ActionListener, MouseListener,
 		
 	}
 }
- 
+//After many trials and too many errors, Woodie Catcher and the HighScores class live happily ever after.
+//Project completed Monday October 17th 2016
  
  
