@@ -62,6 +62,15 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 	        this.setVisible(true);
 
 	}
+			/**
+		     * Start the applet.
+		     */
+		    public void start()
+		    {
+		        requestFocus();
+		        newGame();
+		    }
+
 			public void paint(Graphics g){
 		        if (secretWordLen > 0)
 		        {
@@ -80,6 +89,32 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 		        {
 		            // draw hangman on gallows
 		            g.drawImage (idle, lettersCorrect, lettersCorrect, null);
+		            // draw gallows base
+		           
+
+		            // draw list of wrong letters
+		            
+		            int y = 10;
+		            g.setColor(Color.red);
+		            for (int i = 0; i<lettersWrong; i++)
+		            {
+		                g.drawChars(wrongLetters, i, 1,  y, i);
+		               
+		            }
+
+		        }        if (lettersCorrect == secretWordLen && lettersCorrect!=0)
+		        {
+		            // Draw winning image
+		            g.drawImage (ding, 10, 50, this);
+		        }
+		        else if (lettersWrong > 0)
+		        {
+		            // draw hangman on gallows
+		        	g.drawImage (wrong, 10, 50, this);
+		        }
+		        else if (lettersWrong > 5)
+		        {
+		        	g.drawImage(death, 10, 50, this);
 		        }
 
 			}
@@ -88,8 +123,10 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 		     */
 		    public void newGame()
 		    {
-		        // secret word
-		        String s = "mystery";
+		        // randomly pick secret word from the word list
+		        String s=wordlist[(int)(Math.random()*wordlist.length)].toLowerCase();
+
+
 		        
 		        // Get length of word; chop it if too long.
 		        secretWordLen = Math.min(s.length(), maxWordLen);
@@ -128,18 +165,68 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		char key = e.getKeyChar();
-        
-        // check if valid letter; return if not
-        if (!Character.isLetter(key))
+
+        // start new game if user has already won or lost.
+        if (secretWordLen == lettersCorrect || lettersWrong == maxTries)
         {
+            newGame();
             return;
         }
 
-        // Convert characters from uppercase to lowercase
-        key = Character.toLowerCase(key);
+		boolean found = false;
+        key = 0;
+		// is letter in secret word? If so, add it to correct[].
+        for (int i = 0 ; i < secretWordLen ; i++)
+        {
+            if (key == secretWord [i])
+            {
+                correct [i] = (char) key;
+                lettersCorrect++;
+                found = true;
+            }
+        }
+        if (!found)
+        {
+        	// check if already guessed and correct
+            for (int i=0; i<secretWordLen; i++)
+            {
+                if (key == correct[i])
+                {
+                    return;
+                }
+            }
+            // check if already guessed and wrong
+            for (int i=0; i<maxTries; i++)
+            {
+                if (key == wrongLetters[i])
+                {
+                    return;
+                }
+            }        
+            
+            found = false;
+
+            if (lettersWrong < maxTries)
+            {
+                wrongLetters [lettersWrong] = (char) key;
+                lettersWrong++;
+            }
+        }             
         
+        wrongLetters [lettersWrong] = (char) key;
         lettersWrong++;
-        repaint();
+        if (lettersWrong == maxTries)
+        {
+            // show the answer
+            for (int i = 0 ; i < secretWordLen ; i++)
+            {
+                correct [i] = secretWord [i];
+            }
+        }
+
+        repaint ();
+        
+
 
 		
 	}
@@ -183,8 +270,17 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
-	public static void main(String args[])
-	{
-		new Hangman();
-	}
+	/* This is the word list. */
+    String wordlist[] =
+    {
+        "tolerance",
+        "mace",
+        "rest in peace",
+        "code",
+        "death",
+        "whiteout",
+        "blizzard"
+    };
+
 }
+
