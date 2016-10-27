@@ -11,7 +11,6 @@ import java.awt.event.MouseListener;
 
 public class Hangman extends Applet implements MouseListener, KeyListener {
 
-	Image ding, wrong, idle, death;
 	/** Maximum number of incorrect guesses. */
     final int maxTries = 5;
 
@@ -39,11 +38,33 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
     /** Width of the underlines for the secret word */
     final int underlineWidth = 10;
 
+    Image hangImages[];
+    
+    final int hangmanWidth = 160;
+    
+    final int hangmanHeight = 160;
 
+    /** Image displayed when user wins. */
+    Image ding, wrong, idle, death;
+
+
+    final int WIDTH=500;
+    final int HEIGHT=500;
 
 	public void init()
 	{
-			idle = getImage(getCodeBase(), "idle.gif");
+		this.resize(WIDTH, HEIGHT);
+
+        ding = getImage(getCodeBase(), "ding.gif");
+
+        // load in hangman image sequence
+        hangImages = new Image[maxTries];
+        for (int i=0; i<maxTries; i++)
+        {
+            hangImages[i] = getImage(getCodeBase(), "ding"+(i+1)+".gif");
+        }
+	
+        	idle = getImage(getCodeBase(), "idle.gif");
 			ding = getImage(getCodeBase(), "letter_correct.gif");
 			wrong = getImage(getCodeBase(), "letter_incorrect.gif");
 			death = getImage(getCodeBase(), "game_over.gif");
@@ -60,6 +81,8 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 			addMouseListener(this);
 	        addKeyListener(this);
 	        this.setVisible(true);
+	        repaint();
+	        
 
 	}
 			/**
@@ -72,37 +95,37 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 		    }
 
 			public void paint(Graphics g){
+				// Size of the gallows base
+		        int baseHeight = 10;
+		        int baseWidth = 30;
+		        int i, x, y;
+
+		        // draw gallows pole
+		        g.drawLine(baseWidth/2, 0, baseWidth/2, 2*hangmanHeight-baseHeight/2);
+		        g.drawLine(baseWidth/2, 0, baseWidth+hangmanWidth/2, 0);
+
+		        // draw gallows rope
+		        g.drawLine(baseWidth+hangmanWidth/2, 0, baseWidth+hangmanWidth/2, hangmanHeight/3);
+
+		        // draw gallows base
+		        g.fillRect(0, 2*hangmanHeight-baseHeight, baseWidth, baseHeight);
+			
+		        
 		        if (secretWordLen > 0)
 		        {
 		            // draw underlines for secret word
 		            g.setColor (Color.black);
-		            int x = 0;
-		            int y = getSize ().height - 1;
-		            for (int i = 0 ; i < secretWordLen ; i++)
+		             x = 0;
+		             y = getSize ().height - 1;
+		            for ( i = 0 ; i < secretWordLen ; i++)
 		            {
 		                g.drawLine (x, y, x + underlineWidth, y);
 		                x += underlineWidth + 3;
 		            }
 		        }
 
-				if (lettersWrong > 0)
-		        {
-		            // draw hangman on gallows
-		            g.drawImage (idle, lettersCorrect, lettersCorrect, null);
-		            // draw gallows base
-		           
-
-		            // draw list of wrong letters
-		            
-		            int y = 10;
-		            g.setColor(Color.red);
-		            for (int i = 0; i<lettersWrong; i++)
-		            {
-		                g.drawChars(wrongLetters, i, 1,  y, i);
-		               
-		            }
-
-		        }        if (lettersCorrect == secretWordLen && lettersCorrect!=0)
+				
+				if (lettersCorrect == secretWordLen && lettersCorrect!=0)
 		        {
 		            // Draw winning image
 		            g.drawImage (ding, 10, 50, this);
@@ -111,11 +134,25 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 		        {
 		            // draw hangman on gallows
 		        	g.drawImage (wrong, 10, 50, this);
+		            // draw list of wrong letters
+		            
+		             y = 20;
+		            g.setColor(Color.red);
+		            for ( i = 0; i<lettersWrong; i++)
+		            {
+		                g.drawChars(wrongLetters, i, 500,  y, i);
+		               
+		            }
 		        }
-		        else if (lettersWrong > 5)
+		        else if (lettersWrong > maxTries)
 		        {
 		        	g.drawImage(death, 10, 50, this);
 		        }
+		        else {
+		            g.drawImage (idle, 10, 50, null);
+		        	
+		        }
+				repaint();
 
 			}
 		    /**
@@ -165,6 +202,7 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		char key = e.getKeyChar();
+		
 
         // start new game if user has already won or lost.
         if (secretWordLen == lettersCorrect || lettersWrong == maxTries)
@@ -183,6 +221,7 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
                 correct [i] = (char) key;
                 lettersCorrect++;
                 found = true;
+                System.out.println("meme");
             }
         }
         if (!found)
@@ -211,10 +250,8 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
                 wrongLetters [lettersWrong] = (char) key;
                 lettersWrong++;
             }
-        }             
+        }
         
-        wrongLetters [lettersWrong] = (char) key;
-        lettersWrong++;
         if (lettersWrong == maxTries)
         {
             // show the answer
@@ -243,6 +280,7 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 		if (secretWordLen == lettersCorrect || lettersWrong == maxTries)
         {
             newGame ();
+            repaint();
         }
 
 	}
@@ -273,12 +311,12 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 	/* This is the word list. */
     String wordlist[] =
     {
-        "tolerance",
+        /*"tolerance",
         "mace",
         "rest in peace",
         "code",
         "death",
-        "whiteout",
+        "whiteout",*/
         "blizzard"
     };
 
