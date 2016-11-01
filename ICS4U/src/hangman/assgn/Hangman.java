@@ -11,6 +11,11 @@ import java.awt.event.MouseListener;
 
 public class Hangman extends Applet implements MouseListener, KeyListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7213679506034185155L;
+
 	/** Maximum number of incorrect guesses. */
     final int maxTries = 5;
 
