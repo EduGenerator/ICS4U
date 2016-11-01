@@ -265,6 +265,17 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
                 correct [i] = secretWord [i];
             }
         }
+        wrongLetters [lettersWrong] = (char) key;
+        lettersWrong++;
+        if (lettersWrong == maxTries)
+        {
+            // show the answer
+            for (int i = 0 ; i < secretWordLen ; i++)
+            {
+                correct [i] = secretWord [i];
+            }
+        }
+
 
         repaint ();
         
@@ -282,11 +293,7 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (secretWordLen == lettersCorrect || lettersWrong == maxTries)
-        {
-            newGame ();
-            repaint();
-        }
+		
 
 	}
 
@@ -322,7 +329,8 @@ public class Hangman extends Applet implements MouseListener, KeyListener {
         "code",
         "death",
         "whiteout",*/
-        "blizzard"
+        "a",
+        "bb"
     };
 
 }
