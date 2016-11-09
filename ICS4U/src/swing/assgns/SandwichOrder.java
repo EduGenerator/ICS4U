@@ -133,6 +133,7 @@ public class SandwichOrder extends JFrame implements ActionListener
 		}
 		  if (e.getSource() == total) {
 			  JOptionPane.showMessageDialog (null, "Order sent to Chubway LTD."); 
+			  this.dispose();
 		 }
 		
 		
