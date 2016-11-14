@@ -62,13 +62,13 @@ public class MainRun extends Applet implements MouseListener, KeyListener {
 	public void init()
 	{ 
 		// load in winning image
-        winImage = getImage(getCodeBase(), "res/win.gif");
-        ded = getImage(getCodeBase(), "res/death.gif");
+        winImage = getImage(getCodeBase(), "win.gif");
+        ded = getImage(getCodeBase(), "death.gif");
         // load in hangman image sequence
         hangImages = new Image[maxTries];
         for (int i=0; i<maxTries; i++)
         {
-            hangImages[i] = getImage(getCodeBase(), "res/h"+(i+1)+".gif");
+            hangImages[i] = getImage(getCodeBase(), "h"+(i+1)+".gif");
             System.out.println("res/h"+(i+1)+".gif");
         }
 
@@ -161,7 +161,7 @@ public class MainRun extends Applet implements MouseListener, KeyListener {
         {
             // draw hangman on gallows
             g.drawImage (hangImages[lettersWrong-1], baseWidth, hangmanHeight/3, this);
-            System.out.print("I am trying to drawing");
+            System.out.println("I am trying to drawing");
         } else {
             System.out.print("help");
 

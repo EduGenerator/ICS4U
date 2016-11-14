@@ -1,19 +1,46 @@
 package koch.curve;
 
+import java.applet.*;
 import java.awt.*;
 
-public class Koch {
+public class Koch extends Applet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8657778329797473104L;
+	TextField text = new TextField (10);
+	
+	public void init(){
+		
+		this.add (text);	
+	}
+	
+	public boolean action (Event evt, Object obj)
+	{
+	repaint ();
+	return true;
+	}
+
+	
 	public void koch (Graphics g, int x1, int y1, int x5, int y5, int n)
 	{
 		int x2, y2, x3, y3, x4, y4;
 		double d, a, h;
+		Integer.parseInt(text.getText()) ;
+		try {
+			 
+			}
+			catch ( NumberFormatException e ) {
+			   System.out.println( "Not a legal number." );
+			   
+			}
+		
 
-		g.setColor (Color.black);
-		g.drawLine (x1, getHeight () - y1, x5, getHeight () - y5);	//Draw the line
-
-		if (n == 0)
+		if (n == 0 || (x5 - x1) == 0){
+			g.drawLine (x1, getHeight() - y1, x5, getHeight() - y5); //Draw the line
 			return;
+		}
 
 		d = Math.sqrt ((x5-x1) * (x5-x1) + (y5-y1) * (y5-y1)) / 3;	// 1/3 of the length
 		a = Math.atan2 ((double) (y5-y1), (double) (x5-x1));			// angle of the line
@@ -33,6 +60,9 @@ public class Koch {
 		koch (g, x2, y2, x3, y3, n - 1);
 		koch (g, x3, y3, x4, y4, n - 1);
 		koch (g, x4, y4, x5, y5, n - 1);
+		koch (g, 50, 100, 350, 100, 2); 
+		
+		repaint();
 	}
 
 }
