@@ -9,7 +9,7 @@ public class Tree extends Applet {
 	int width,height;
 	int len,temp1 = 0,temp2 = 0;
 
-	double bran,count;
+	double b,count;
 	int ang;
 	double rand;
 
@@ -23,7 +23,7 @@ public class Tree extends Applet {
 		setBackground(Color.black);
 
 		count = 21;
-		bran = 50;
+		b = 50;
 		//ang = 10;
 
 		page = createImage(width,height);
@@ -53,7 +53,7 @@ public void branch(Graphics g,int x,int y,int ang, int count){
     count-=1;
 
     if(count%2 == 0)
-        bran-=2;
+        b-=2;
 
     if(count == 20){
         g.drawLine(x1,y1,x2,y2);
@@ -64,8 +64,8 @@ public void branch(Graphics g,int x,int y,int ang, int count){
 
         rand = ang * (Math.PI/180);
 
-        int xChange = (int) (Math.sin(rand)*bran); 
-        int yChange = (int) (Math.cos(rand)*bran);
+        int xChange = (int) (Math.sin(rand)*b); 
+        int yChange = (int) (Math.cos(rand)*b);
         y2 = y-yChange;
 
         g.setColor(Color.blue);
