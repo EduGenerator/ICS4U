@@ -18,24 +18,29 @@ public class Koch extends Applet {
 	
 	public boolean action (Event evt, Object obj)
 	{
+		validate();
 	repaint ();
 	return true;
 	}
 
-	
-	public void koch (Graphics g, int x1, int y1, int x5, int y5, int n)
-	{
-		int x2, y2, x3, y3, x4, y4;
-		double d, a, h;
-		Integer.parseInt(text.getText()) ;
+	public void paint(Graphics g){
+		int n = 0;
 		try {
-			 
+			n = Integer.parseInt(text.getText()) ;
+
 			}
 			catch ( NumberFormatException e ) {
 			   System.out.println( "Not a legal number." );
 			   
 			}
 		
+		koch (g, 50, 100, 350, 100, n); 
+	}
+	public void koch (Graphics g, int x1, int y1, int x5, int y5, int n)
+	{
+		int x2, y2, x3, y3, x4, y4;
+		double d, a, h;
+	
 
 		if (n == 0 || (x5 - x1) == 0){
 			g.drawLine (x1, getHeight() - y1, x5, getHeight() - y5); //Draw the line

@@ -15,6 +15,7 @@ public class Tree extends Applet {
 
 	Image page;
 	Graphics draw;
+	
 
 	public void init(){
 		width = 1000;
@@ -24,7 +25,7 @@ public class Tree extends Applet {
 
 		count = 21;
 		b = 50;
-		//ang = 10;
+		ang = 10;
 
 		page = createImage(width,height);
 		draw = page.getGraphics();
@@ -45,6 +46,7 @@ public class Tree extends Applet {
     branch(draw, x2, y2, 20, 21);
     g.drawImage(page,0,0,width,height,this);
     repaint();
+    validate();
 
 
 }

@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+
 import javax.swing.JOptionPane;
 
 
@@ -61,14 +63,15 @@ public class MainRun extends Applet implements MouseListener, KeyListener {
      
 	public void init()
 	{ 
+		validate();
 		// load in winning image
-        winImage = getImage(getCodeBase(), "win.gif");
-        ded = getImage(getCodeBase(), "death.gif");
+        winImage = getImage(getCodeBase(), "res"+File.separator+"win.gif");
+        ded = getImage(getCodeBase(), "res"+File.separator+"death.gif");
         // load in hangman image sequence
         hangImages = new Image[maxTries];
         for (int i=0; i<maxTries; i++)
         {
-            hangImages[i] = getImage(getCodeBase(), "h"+(i+1)+".gif");
+            hangImages[i] = getImage(getCodeBase(), "res"+File.separator+(i+1)+".gif");
             System.out.println("res/h"+(i+1)+".gif");
         }
 
@@ -329,13 +332,14 @@ public class MainRun extends Applet implements MouseListener, KeyListener {
 	/* This is the word list. */
     String wordlist[] =
     {
-        /*"abstraction",
-        "ambiguous",
-        "arithmetic",
-        "backslash",
+        "razor",
+        "scooter",
+        "code",
+        "peripheral",
         "bitmap",
-        "circumstance",*/
-        "combination"
+        "annoyance",
+        "with",
+        "image"
     };
 
 	
