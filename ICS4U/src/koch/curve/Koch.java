@@ -1,37 +1,46 @@
 package koch.curve;
 
-import java.applet.*;
-import java.awt.*;
+import java.applet.Applet;
+import java.awt.Color;
+import java.awt.Event;
+import java.awt.Graphics;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Koch extends Applet {
+import javax.swing.JPanel;
+
+public class Koch extends Applet implements ActionListener{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8657778329797473104L;
-	TextField text = new TextField (10);
+	static TextField text = new TextField (10);
 	
 	public void init(){
-		
-		this.add (text);	
+		//JPanel panel = new JPanel();
+		this.add(text);
+		//this.add(panel);
+		text.addActionListener(this);
 	}
 	
 	public boolean action (Event evt, Object obj)
 	{
-		validate();
+		System.out.println("painted");
 	repaint ();
 	return true;
 	}
 
 	public void paint(Graphics g){
-		int n = 0;
+		super.paint(g);
+		int n;
 		try {
-			n = Integer.parseInt(text.getText()) ;
+			n = Integer.parseInt(text.getText());
 
 			}
 			catch ( NumberFormatException e ) {
-			   System.out.println( "Not a legal number." );
-			   
+				n = 0;
 			}
 		
 		koch (g, 50, 100, 350, 100, n); 
@@ -43,6 +52,7 @@ public class Koch extends Applet {
 	
 
 		if (n == 0 || (x5 - x1) == 0){
+			g.setColor (Color.black);
 			g.drawLine (x1, getHeight() - y1, x5, getHeight() - y5); //Draw the line
 			return;
 		}
@@ -58,15 +68,16 @@ public class Koch extends Applet {
 		x4 = x1 + (int) (2 * d * Math.cos (a));
 		y4 = y1 + (int) (2 * d * Math.sin (a));
 
-		g.setColor (Color.white);
-		g.drawLine (x2, getHeight () - y2, x4, getHeight () - y4);	// Erase the middle
-
 		koch (g, x1, y1, x2, y2, n - 1);	 // Recursive calls to replace line with new pattern
 		koch (g, x2, y2, x3, y3, n - 1);
 		koch (g, x3, y3, x4, y4, n - 1);
 		koch (g, x4, y4, x5, y5, n - 1);
-		koch (g, 50, 100, 350, 100, 2); 
-		
+		//koch (g, 50, 100, 350, 100, n-1); 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		repaint();
 	}
 

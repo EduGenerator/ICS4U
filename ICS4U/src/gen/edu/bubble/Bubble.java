@@ -26,8 +26,8 @@ public class Bubble extends JApplet implements Runnable, KeyEventDispatcher
     
     private boolean restart=false;
 
-   // private Image backbuffer;
-    //private Graphics bg;
+    private Image backbuffer;
+    private Graphics bg;
 
 
 
@@ -45,9 +45,7 @@ public class Bubble extends JApplet implements Runnable, KeyEventDispatcher
 
     	this.setSize(WIDTH, HEIGHT);
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this);
-       // backbuffer = createImage(WIDTH, HEIGHT);
-        //bg = backbuffer.getGraphics();
-
+      
     	makeList();
 
     }
@@ -97,13 +95,16 @@ public class Bubble extends JApplet implements Runnable, KeyEventDispatcher
 
     public void paint(Graphics g)
     {
+    	 backbuffer = createImage(WIDTH, HEIGHT);
+         bg = backbuffer.getGraphics();
+
     	
-    	showList(g);
-    	g.setColor(Color.PINK);
-        g.drawString("Bubblesort demonstration", 20, 20);
-        g.drawString("Press 0-9 to change speed, space to restart", 20, 40);
-        g.drawString("9 for slowest speed, 1 for medium speed, and 0 for fastest speed", 20, 60);
-        //g.drawImage(backbuffer,0,0,this);
+    	showList(bg);
+    	bg.setColor(Color.PINK);
+        bg.drawString("Bubblesort demonstration", 20, 20);
+        bg.drawString("Press 0-9 to change speed, space to restart", 20, 40);
+        bg.drawString("9 for slowest speed, 1 for medium speed, and 0 for fastest speed", 20, 60);
+        g.drawImage(backbuffer,0,0,this);
 
 
     }
