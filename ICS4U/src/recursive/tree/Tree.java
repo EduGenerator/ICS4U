@@ -46,8 +46,7 @@ public class Tree extends Applet {
     branch(draw, x2, y2, 20, 21);
     g.drawImage(page,0,0,width,height,this);
     repaint();
-    validate();
-
+   
 
 }
 
