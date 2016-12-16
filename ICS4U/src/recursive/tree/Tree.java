@@ -68,6 +68,7 @@ public void branch(Graphics g,int x,int y,int ang, int count){
         int xChange = (int) (Math.sin(rand)*b); 
         int yChange = (int) (Math.cos(rand)*b);
         y2 = y-yChange;
+        x2 = x-xChange;
 
         g.setColor(Color.blue);
         g.drawLine(x1,y1,x1-xChange,y2);

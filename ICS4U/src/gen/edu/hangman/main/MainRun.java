@@ -22,6 +22,14 @@ public class MainRun extends Applet implements MouseListener, KeyListener {
 	final int HEIGHT=500;
 	final int WIDTH=500;
 	
+	/*
+	 * Hello! It's Jordan! Unfortunately, I have no clue how to make the images display on Mac. My code for
+	 * displaying images has now been checked by both Ewan and Dylan, and even myself. It should work.
+	 * It does not. I have officially given up on this, because I need to focus on my culminating with Dylan.
+	 * Sorry for letting you down,
+	 * -Jordan
+	 */
+	
 	/** Maximum number of incorrect guesses. */
     final int maxTries = 5;
 

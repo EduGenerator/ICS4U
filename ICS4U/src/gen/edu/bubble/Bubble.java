@@ -172,7 +172,7 @@ public class Bubble extends JApplet implements Runnable, KeyEventDispatcher
             } 
             else if (key==48)
             {
-                delay=25;
+                delay=14;
             }
             else if (key==32)
             {
