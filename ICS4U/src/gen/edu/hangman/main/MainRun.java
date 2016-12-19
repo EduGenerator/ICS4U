@@ -344,10 +344,23 @@ public class MainRun extends Applet implements MouseListener, KeyListener {
         "scooter",
         "code",
         "peripheral",
-        "bitmap",
         "annoyance",
         "with",
-        "image"
+        "image",
+        "broken",
+        "reaper",
+        "multiply",
+        "travel",
+        "plagiarism",
+        "terrible",
+        "honest",
+        "mistake",
+        "false",
+        "ownership",
+        "fault",
+        "fight",
+        "try",
+        
     };
 
 	

@@ -48,7 +48,7 @@ public class CatCatcher extends JFrame implements ActionListener, MouseListener,
 
  			
 			
-	        
+	        this.setResizable(false);
  			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  			this.setExtendedState(MAXIMIZED_BOTH);
  			this.setTitle("Woodie Catcher");
